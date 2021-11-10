@@ -8,12 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" />
     <style>
-        .display-4 {
-            font-size: 2rem;
-        }
-
-        .c4 {
-            width: 35%;
+        .card-x,
+        .card-x span,
+        .card-x i {
+            color: #eeeeee !important;
         }
     </style>
 </head>
@@ -21,50 +19,38 @@
 <body ng-app="app" class="container-fluid">
     <div ng-controller="controller">
         <ul class="pagination pagination-lg justify-content-end my-3">
-            <li ng-repeat="x in l1" class="page-item {{x==num?'active':''}}"><a
-                    ng-click="Num(x)" class="page-link" href="#num">{{x}}</a>
+            <li ng-repeat="x in l1" class="page-item {{x==num?'active':''}}"><a ng-click="Num(x)" class="page-link"
+                    href="#num">{{x}}</a>
             </li>
             <li class="page-item">
                 <a href="#ran" ng-click="Ran()" class="page-link"><i class="fa fa-fw fa-random"></i></a>
             </li>
         </ul>
-        <table class="table table-bordered display-4">
-            <tbody>
-                <tr ng-repeat="x in l1">
-                    <td>{{x}} + {{num}} = {{x + num}}</td>
-                    <td class="text-center c4">
-                        <i ng-repeat="k in l1 | limitTo: x"
-                            class="fa fa-fw {{font[num]}} {{k==4||k==7?'ml-4':''}}"></i>
-                    </td>
-                    <td class="text-center c4">
-                        <i ng-repeat="l in l1 | limitTo: num"
-                            class="fa fa-fw {{font[num]}} {{l==4||l==7?'ml-4':''}}"></i>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="text-center display-1">
-            {{ran}} + {{num}} = ?
+        <div class="row">
+            <div ng-repeat="x in l1" ng-click="Toggle(x)" class="col-4 text-center mb-3">
+                <div class="card card-{{x}} shadow">
+                    <div class="card-body">
+                        <div class="display-3">
+                            <span class="{{color[x%3]}}">{{x}}</span> + <span class="text-danger">{{num}}</span> =
+                            <span class="kq-x kq-{{x}} text-secondary">?</span>
+                            <span class="kq-y kq-{{x}} d-none">{{x + num}}</span>
+                        </div>
+                        <hr>
+                        <div class="mb-3">
+                            <i ng-repeat="k in l1 | limitTo: x"
+                                class="fa fa-fw fa-2x {{font[x]}} {{color[x%3]}} {{k==4||k==7?'ml-3':''}}"></i>
+                        </div>
+                        <div class="text-danger"> <i ng-repeat="l in l1 | limitTo: num"
+                                class="fa fa-fw fa-2x {{font[x]}} {{l==4||l==7?'ml-3':''}}"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
-    <script>
-        angular.module('app', [])
-            .controller('controller', function ($scope) {
-                $scope.font = ["", "fa-cat text-primary", "fa-crow text-success", "fa-apple-alt text-danger", "fa-carrot text-info", "fa-pizza-slice text-warning", "fa-fish text-primary", "fa-frog text-success", "fa-horse text-danger", "fa-hamburger text-info"];
-                $scope.l1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-                $scope.num = 1;
-                $scope.ran = 1;
-
-                $scope.Num = function (n) {
-                    $scope.num = n;
-                }
-
-                $scope.Ran = function () {
-                    $scope.ran = Math.floor(Math.random() * 9) + 1;
-                }
-            });
-    </script>
+    <script src="index.js"></script>
 </body>
 
 </html>
