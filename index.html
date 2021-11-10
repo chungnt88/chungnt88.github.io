@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Phép cộng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" />
+    <style>
+        .display-4 {
+            font-size: 3rem;
+        }
+
+        .c4 {
+            width: 40%;
+        }
+    </style>
+</head>
+
+<body ng-app="app" class="container-fluid">
+    <div ng-controller="controller">
+        <ul class="pagination justify-content-end my-3">
+            <li ng-repeat="x in [].constructor(9) track by $index" class="page-item"><a ng-click="Num($index+1)"
+                    class="page-link" href="#">{{$index+1}}</a></li>
+        </ul>
+        <table class="table table-bordered display-4">
+            <tbody>
+                <tr ng-repeat="x in [].constructor(9) track by $index">
+                    <td>{{$index+1}} + {{num}} = {{$index+1+num}}</td>
+                    <td class="text-center c4">
+                        <i ng-repeat="k in [].constructor($index+1) track by $index"
+                            class="fa fa-fw {{font[num]}} {{$index==3||$index==6?'ml-5':''}}"></i>
+                    </td>
+                    <td class="text-center c4">
+                        <i ng-repeat="l in [].constructor(num) track by $index"
+                            class="fa fa-fw {{font[num]}} {{$index==3||$index==6?'ml-5':''}}"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+    <script>
+        angular.module('app', [])
+            .controller('controller', function ($scope) {
+                $scope.font = ["", "fa-cat text-primary", "fa-crow text-success", "fa-dog text-danger", "fa-dove text-info", "fa-dragon text-warning", "fa-fish text-primary", "fa-frog text-success", "fa-horse text-danger", "fa-spider text-info"];
+                $scope.num = 1;
+                $scope.l1 = [];
+                for (let i = 1; i < 10; i++) {
+                    $scope.l1.push(i);
+
+                }
+
+                $scope.Num = function (n) {
+                    $scope.num = n;
+                }
+            });
+    </script>
+</body>
+
+</html>
