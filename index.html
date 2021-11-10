@@ -9,52 +9,59 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" />
     <style>
         .display-4 {
-            font-size: 3rem;
+            font-size: 2rem;
         }
 
         .c4 {
-            width: 40%;
+            width: 35%;
         }
     </style>
 </head>
 
 <body ng-app="app" class="container-fluid">
     <div ng-controller="controller">
-        <ul class="pagination justify-content-end my-3">
-            <li ng-repeat="x in [].constructor(9) track by $index" class="page-item"><a ng-click="Num($index+1)"
-                    class="page-link" href="#">{{$index+1}}</a></li>
+        <ul class="pagination pagination-lg justify-content-end my-3">
+            <li ng-repeat="x in l1" class="page-item {{x==num?'active':''}}"><a
+                    ng-click="Num(x)" class="page-link" href="#num">{{x}}</a>
+            </li>
+            <li class="page-item">
+                <a href="#ran" ng-click="Ran()" class="page-link"><i class="fa fa-fw fa-random"></i></a>
+            </li>
         </ul>
         <table class="table table-bordered display-4">
             <tbody>
-                <tr ng-repeat="x in [].constructor(9) track by $index">
-                    <td>{{$index+1}} + {{num}} = {{$index+1+num}}</td>
+                <tr ng-repeat="x in l1">
+                    <td>{{x}} + {{num}} = {{x + num}}</td>
                     <td class="text-center c4">
-                        <i ng-repeat="k in [].constructor($index+1) track by $index"
-                            class="fa fa-fw {{font[num]}} {{$index==3||$index==6?'ml-5':''}}"></i>
+                        <i ng-repeat="k in l1 | limitTo: x"
+                            class="fa fa-fw {{font[num]}} {{k==4||k==7?'ml-4':''}}"></i>
                     </td>
                     <td class="text-center c4">
-                        <i ng-repeat="l in [].constructor(num) track by $index"
-                            class="fa fa-fw {{font[num]}} {{$index==3||$index==6?'ml-5':''}}"></i>
+                        <i ng-repeat="l in l1 | limitTo: num"
+                            class="fa fa-fw {{font[num]}} {{l==4||l==7?'ml-4':''}}"></i>
                     </td>
                 </tr>
             </tbody>
         </table>
-
+        <div class="text-center display-1">
+            {{ran}} + {{num}} = ?
+        </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
     <script>
         angular.module('app', [])
             .controller('controller', function ($scope) {
-                $scope.font = ["", "fa-cat text-primary", "fa-crow text-success", "fa-dog text-danger", "fa-dove text-info", "fa-dragon text-warning", "fa-fish text-primary", "fa-frog text-success", "fa-horse text-danger", "fa-spider text-info"];
+                $scope.font = ["", "fa-cat text-primary", "fa-crow text-success", "fa-apple-alt text-danger", "fa-carrot text-info", "fa-pizza-slice text-warning", "fa-fish text-primary", "fa-frog text-success", "fa-horse text-danger", "fa-hamburger text-info"];
+                $scope.l1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
                 $scope.num = 1;
-                $scope.l1 = [];
-                for (let i = 1; i < 10; i++) {
-                    $scope.l1.push(i);
-
-                }
+                $scope.ran = 1;
 
                 $scope.Num = function (n) {
                     $scope.num = n;
+                }
+
+                $scope.Ran = function () {
+                    $scope.ran = Math.floor(Math.random() * 9) + 1;
                 }
             });
     </script>
