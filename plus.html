@@ -1,25 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" />
     <title>Phép cộng</title>
     <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
         span.num {
             display: inline-block;
-            min-width: 27px;
+            min-width: 36px;
+        }
+
+        hr {
+            border-color: #999;
         }
     </style>
 </head>
+
 <body ng-app="app" class="container-fluid">
     <div ng-controller="controller">
-        <div class="row">
-            <div class="col-3 h3" ng-repeat="x in model">
-                <span ng-bind="x.v1" class="num"></span>
-                <span ng-bind="x.v0"></span>
-                <span ng-bind="x.v2" class="num"></span> =
+        <div class="h1">
+            <span ng-bind="title"></span>
+            <span style="float: right;">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span>.... / ....</span>
+            </span>
+        </div>
+        <hr class="mt-1" />
+        <div class="row" ng-repeat="x in model">
+            <div class="col-3 h2" ng-repeat="k in x">
+                <span ng-bind="k.v1" class="num"></span>
+                <span ng-bind="k.v0"></span>
+                <span ng-bind="k.v2" class="num"></span> =
                 <hr class="mt-1" />
             </div>
         </div>
@@ -28,4 +48,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
     <script src="con7.js"></script>
     <script src="plus.js"></script>
+
 </html>
