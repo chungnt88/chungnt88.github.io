@@ -5,18 +5,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dạy con học">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" />
-    <title>Phép cộng</title>
+    <title>Toán 1</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
+            font-size: 36px;
         }
 
         span.num {
             display: inline-block;
-            min-width: 36px;
+            min-width: 41px;
+        }
+
+        span.icon {
+            display: inline-block;
+            min-width: 21px;
+            text-align: center;
         }
 
         hr {
@@ -27,19 +35,39 @@
 
 <body ng-app="app" class="container-fluid">
     <div ng-controller="controller">
-        <div class="h1">
+        <div>
             <span ng-bind="title"></span>
+            <span class="d-print-none">
+                <span class="text-muted pl-5 small">min</span>
+                <span class="text-muted pl-5 small">max</span>
+                <span class="text-muted pl-5 small">minus</span>
+                <span class="text-muted pl-5 small">mix</span>
+                <span class="text-muted pl-5 small">com</span>
+            </span>
             <span style="float: right;">
-                <i class="fa-regular fa-calendar-check"></i>
-                <span>.... / ....</span>
+                <span>..... / .....</span>
             </span>
         </div>
         <hr class="mt-1" />
-        <div class="row" ng-repeat="x in model">
-            <div class="col-3 h2" ng-repeat="k in x">
-                <span ng-bind="k.v1" class="num"></span>
-                <span ng-bind="k.v0"></span>
-                <span ng-bind="k.v2" class="num"></span> =
+        <div ng-if="view_plus">
+            <div class="row" ng-repeat="x in model">
+                <div class="col-3" ng-repeat="k in x">
+                    <span ng-bind="k.v1" class="num"></span>
+                    <span ng-bind="k.v0" class="icon"></span>
+                    <span ng-bind="k.v2" class="num"></span> =
+                    <hr class="mt-1" />
+                </div>
+            </div>
+        </div>
+        <div ng-if="view_com">
+            <div ng-repeat="x in model">
+                <div class="row">
+                    <div class="col-2 text-center" ng-repeat="k in x">
+                        <span ng-bind="k.v"></span>
+                        <span ng-bind="x[$index].v > x[$index+1].v ? '>' : x[$index].v < x[$index+1].v ? '<' : '='" class="d-print-none text-muted" style="float: right;"></span>
+
+                    </div>
+                </div>
                 <hr class="mt-1" />
             </div>
         </div>
