@@ -24,7 +24,24 @@ angular.module("app", []).controller("controller", function ($scope) {
     for (let k = 0; k < page_range; k++) {
         let temp = [];
         for (let i = 0; i < 4; i++) {
-            temp.push(plus ? random_plus(min, max) : random_minus(min, max));
+            switch (plus) {
+                case 4:
+                    v2 = random_int(2, 9);
+                    v1 = v2 * random_int(min || 1, max || 100);
+                    temp.push({v1, v2, v0: ":"});
+                    break;
+                case 3:                   
+                    v2 = random_int(2, 9);
+                    v1 = random_int(min || 1, max || 100);
+                    temp.push({v1, v2, v0: "x"});
+                    break;
+                case 2:
+                    temp.push(random_minus(min, max));
+                    break;
+                default:
+                    temp.push(random_plus(min, max));
+                    break;
+            }
         }
         ok.push(temp);
     }
@@ -38,24 +55,7 @@ function load_compare(min, max) {
     for (let k = 0; k < page_range; k++) {
         let temp = [];
         for (let i = 0; i < 6; i++) {
-            switch (plus) {
-                case 4:                   
-                    v1 = random_int(2, 9);
-                    v2 = random_int(min ?? 1000, max ?? 1000000);
-                    temp.push({v1, v2, v0: "x"});
-                    break;
-                case 3:
-                    v1 = random_int(2, 9);
-                    v2 = random_int(min ?? 1000, max ?? 1000000);
-                    temp.push({v1: v1*v2, v2, v0: ":"});
-                    break;
-                case 2:
-                    temp.push(random_minus(min, max));
-                    break;
-                default:
-                    temp.push(random_plus(min, max));
-                    break;
-            }            
+            temp.push({ v: random_int(min, max) });     
         }
         ok.push(temp);
     }

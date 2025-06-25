@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" />
-    <title>Toán 1</title>
+    <title>Toán 3</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -52,7 +52,7 @@
         <div ng-if="view_plus">
             <div class="row" ng-repeat="x in model">
                 <div class="col-3" ng-repeat="k in x">
-                    <span ng-bind="k.v1" class="num"></span>
+                    <span ng-bind="k.v1 | number:0" class="num"></span>
                     <span ng-bind="k.v0" class="icon"></span>
                     <span ng-bind="k.v2" class="num"></span> =
                     <hr class="mt-1" />
