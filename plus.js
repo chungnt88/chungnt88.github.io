@@ -4,7 +4,7 @@ const page_range = 39;
 angular.module("app", []).controller("controller", function ($scope) {
     let min = Number(con7.params.min);
     let max = Number(con7.params.max);
-    let plus = con7.params.minus ? false : true;
+    let plus = Number(con7.params.minus); // ? false : true;
 
     if (con7.params.com) {
         $scope.model = load_compare(min, max);
@@ -29,7 +29,7 @@ angular.module("app", []).controller("controller", function ($scope) {
         ok.push(temp);
     }
     $scope.model = ok;
-    $scope.title = plus ? "Phép cộng" : "Phép trừ";
+    $scope.title = plus == 4 ? "Phép chia" : plus == 3 ? "Phép nhân" : plus == 2 ? "Phép cộng" : "Phép trừ";
     $scope.view_plus = true;
 });
 
@@ -38,7 +38,24 @@ function load_compare(min, max) {
     for (let k = 0; k < page_range; k++) {
         let temp = [];
         for (let i = 0; i < 6; i++) {
-            temp.push({ v: random_int(min, max) });
+            switch (plus) {
+                case 4:                   
+                    v1 = random_int(2, 9);
+                    v2 = random_int(min ?? 1000, max ?? 1000000);
+                    temp.push({v1, v2, v0: "x"});
+                    break;
+                case 3:
+                    v1 = random_int(2, 9);
+                    v2 = random_int(min ?? 1000, max ?? 1000000);
+                    temp.push({v1: v1*v2, v2, v0: ":"});
+                    break;
+                case 2:
+                    temp.push(random_minus(min, max));
+                    break;
+                default:
+                    temp.push(random_plus(min, max));
+                    break;
+            }            
         }
         ok.push(temp);
     }
