@@ -23,7 +23,7 @@ angular.module("app", []).controller("controller", function ($scope) {
     let ok = [];
     for (let k = 0; k < page_range; k++) {
         let temp = [];
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 2; i++) {
             switch (plus) {
                 case 4:
                     v2 = random_int(2, 9);
